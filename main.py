@@ -23,15 +23,24 @@ def figurates(phrase: str, words: list | set):
 @app.route('/')
 @app.route('/index')
 def index():
-    param = {}
-    param['title'] = "Главная"
-    return render_template('base.html', **param)
+    params = {'title': "Главная"}
+    return render_template('base.html', **params)
+
+
+@app.route('/list_prof/<list>')
+def list_prof(list: str):
+    with open('worker manifest.txt', 'r', encoding='UTF-8') as f:
+        worker_list = f.read().split('\n')
+    params = {'title': 'Список персонала',
+              'list': list,
+              'workers': worker_list}
+    return render_template('list_profs.html', **params)
 
 
 @app.route('/training/<path>')
 def training(path: str):
     param = {}
-    param['title'] = "Главная"
+    param['title'] = "Кабинеты"
     deck = 'Палуба не определена 🤖'
 
     if figurates(path.lower(), ['лог', 'атр', 'евт']):

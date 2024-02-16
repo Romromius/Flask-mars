@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Список рабочих</h2>
+{% if list == 'ol' %}
+    {% for worker in workers %}
+        {{ loop.index }} - {{ worker }}<br>
+    {% endfor %}
+{% elif list == 'el' %}
+    {% for worker in workers %}
+        <li>{{ worker }}<br></li>
+    {% endfor %}
+{% else %}
+    ПРОИЗОШЛА КАКАЯ-ТО ЧЕРТОВЩИНА 💀
+{% endif %}
+{% endblock %}
