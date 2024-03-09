@@ -1,9 +1,7 @@
-from flask import Flask, render_template, redirect
-from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import DataRequired
-from flask_login import LoginManager, login_user
 from flask import Flask
+from flask import render_template, redirect
+from flask_login import LoginManager, login_user
+
 from data import db_session
 from data.users import User
 from forms.user import RegisterForm, LoginForm
@@ -78,7 +76,7 @@ def login():
         print(user.name)
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
-            return redirect("/")
+            return redirect("/list_prof/el")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
