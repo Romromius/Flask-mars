@@ -1,9 +1,7 @@
-def fibonacci(n):
-    a, b = 0, 1
-    for _ in range(n):
-        yield a
-        a, b = b, a + b
+import requests
 
-
-print(*fibonacci(5))
-print(*fibonacci(10), sep=', ')
+test = requests.post('http://127.0.0.1:8080/api/v2/users',
+                     json={'name': 'OLOLO',
+                           'email': 'asd.awda.fae',
+                           'password': 'hola'})
+print(test.json())
