@@ -15,8 +15,28 @@ def get_jobs():
     jobs = db_sess.query(Job).all()
     return flask.jsonify(
         {
-            'news':
-                [item.to_dict()
-                 for item in jobs]
+            'jobs':
+                [item.to_dict() for item in jobs]
         }
     )
+
+
+@blueprint.route('/api/jobs/<int:job_id>')
+def get_job(job_id):
+    db_sess = db_session.create_session()
+    try:
+        job = db_sess.query(Job).filter(Job.id == job_id)[0]
+    except IndexError:
+        return 'No such job 😢'
+    return flask.jsonify(
+        {
+            'jobs':
+                [job.to_dict()]
+        }
+    )
+
+
+@blueprint.app_errorhandler(404)
+def er404(info):
+    print(info)
+    return 'API EROR 404'
