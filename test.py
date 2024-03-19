@@ -16,3 +16,6 @@ print('NOW LET\'S MAKE SOME ERRORS')
 print('GET NOT EXISTING USER', requests.get('http://127.0.0.1:8080/api/v2/users/616').json())
 print('DEL NOT EXISTING USER', requests.delete('http://127.0.0.1:8080/api/v2/users/616').json())
 print('GET WRONG ADDRESS', requests.get('http://127.0.0.1:8080/api/v2/use'))
+john = json = {'name': 'john', 'email': chr(random.randint(0, 255)), 'password': 'smith'}
+print('POST john', requests.post('http://127.0.0.1:8080/api/v2/users', json=john).json())
+print('POST john AGAIN', requests.post('http://127.0.0.1:8080/api/v2/users', json=john).json())
