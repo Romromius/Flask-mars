@@ -38,7 +38,7 @@ class UserListResource(Resource):
             only=('id', 'name', 'email')) for item in users]})
 
     def post(self):
-        args = api_argparser.parse()
+        args = api_argparser.user_parse()
         session = db_session.create_session()
         user = User()
         user.name = args['name']

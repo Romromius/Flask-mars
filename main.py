@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect
 from flask_login import LoginManager, login_user
 from flask_restful import Api
 
+import jobs_resources
 # import mars_api
 import user_resources
 from data import db_session
@@ -112,13 +113,15 @@ def training(path: str):
 
 
 @app.errorhandler(404)
-def er404():
-    return '404'
+def er404(error):
+    return error
 
 
 if __name__ == '__main__':
     api.add_resource(user_resources.UserListResource, '/api/v2/users')
     api.add_resource(user_resources.UsersResource, '/api/v2/users/<int:user_id>')
+    api.add_resource(jobs_resources.JobListResource, '/api/v2/jobs')
+    api.add_resource(jobs_resources.JobResource, '/api/v2/jobs/<int:job_id>')
     db_session.global_init("db/mars_explorer.db")
     # app.register_blueprint(mars_api.blueprint)
     app.run(port='8080', host='127.0.0.1')
