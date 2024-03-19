@@ -111,6 +111,11 @@ def training(path: str):
     return render_template('training.html', **param)
 
 
+@app.errorhandler(404)
+def er404():
+    return '404'
+
+
 if __name__ == '__main__':
     api.add_resource(user_resources.UserListResource, '/api/v2/users')
     api.add_resource(user_resources.UsersResource, '/api/v2/users/<int:user_id>')
