@@ -1,3 +1,4 @@
+import sqlalchemy.exc
 from flask import *
 from flask_restful import *
 
@@ -45,5 +46,8 @@ class UserListResource(Resource):
 
         user.set_password(args['password'])
         session.add(user)
-        session.commit()
+        try:
+            session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({'message': 'this email is unavailable'})
         return jsonify({'id': user.id})
